@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import "swiper/css";
 
 const Nav = styled.div`
   height: 50px;
@@ -78,7 +82,7 @@ const Input = styled.input`
 const MonthNewMenu = styled.div`
   width: 100%;
   //height: 300px;
-  p {
+  h1 {
     font-size: 18px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -91,23 +95,46 @@ const Content = styled.div<{ isPc: boolean }>`
   top: 0;
   left: 0;
   width: ${(props) => (props.isPc ? "70%" : "100%")};
-  background-color: pink;
+  //background-color: pink;
   z-index: -1;
   margin-left: ${(props) => (props.isPc ? "15%" : "0")};
   ${MonthNewMenu} {
-    background-color: #b3b3eb;
+    //background-color: #b3b3eb;
     padding-top: 120px;
+    h1,
     p {
-      padding-left: ${(props) => (props.isPc ? "" : "10px")};
+      padding-left: 10px;
     }
   }
 `;
 
-const SlideBox = styled.div`
-  background-color: yellow;
+const PImg = styled.div<{ url: string; isPc: boolean }>`
+  height: ${(props) => (props.isPc ? "160px" : "120px")};
+  background-color: #f6f5ec;
+  background-image: url(${(props) => props.url});
+  background-size: cover;
+`;
+
+const Box = styled.div`
+  //background-color: #c7c775;
   margin: 0px;
   padding: 0px;
+  word-break: keep-all;
+  cursor: pointer;
+  h2 {
+    font-size: 16px;
+    padding-top: 5px;
+    font-weight: 500;
+  }
 `;
+
+const Item = [
+  ["배스킨라빈스", "스트로베리 하트 모찌", "02.png"],
+  ["파리바게뜨", "오렌지&자몽 레어치즈 타르트", "04.png"],
+  ["투썸플레이스", "스트로베리 초콜릿 생크림", "01.jpg"],
+  ["GS25", "그릭 프로즌 요거트", "05.jpg"],
+  ["던킨도너츠", "마이멜로디 딸기 츄이스티", "03.png"],
+];
 
 function Search() {
   const navigate = useNavigate();
@@ -115,6 +142,14 @@ function Search() {
   const onHomeClick = () => {
     navigate("/");
   };
+  const [num, setNum] = useState(4);
+  useEffect(() => {
+    if (isPc) {
+      setNum(4);
+    } else {
+      setNum(2.5);
+    }
+  }, [isPc]);
 
   return (
     <>
@@ -137,7 +172,23 @@ function Search() {
       </SearchBox>
       <Content isPc={isPc}>
         <MonthNewMenu>
-          <p>이달의 인기 신메뉴</p>
+          <h1>이달의 인기 신메뉴</h1>
+          <Swiper
+            slidesPerView={num}
+            spaceBetween={30}
+            modules={[Pagination]}
+            className="mySwiper"
+            style={{ marginLeft: "10px" }}
+          >
+            {Item.map((item, index) => (
+              <SwiperSlide>
+                <Box>
+                  <PImg url={"/product/" + item[2]} isPc={isPc}></PImg>
+                  <h2>{item[1]}</h2>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </MonthNewMenu>
       </Content>
     </>
