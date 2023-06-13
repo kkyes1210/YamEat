@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css";
+import Footer from "./Footer";
 
 const Nav = styled.div`
   height: 50px;
@@ -87,6 +88,8 @@ const MonthNewMenu = styled.div`
     font-weight: 600;
     padding-bottom: 5px;
   }
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c6c6c6;
 `;
 
 const Content = styled.div<{ isPc: boolean }>`
@@ -128,12 +131,69 @@ const Box = styled.div`
   }
 `;
 
+const Rank = styled.div`
+  //background-color: #fae2e2;
+  width: 100%;
+  margin-top: 40px;
+  cursor: pointer;
+  //height: 200px;
+  border-bottom: 1px solid #c6c6c6;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  h1 {
+    display: inline-block;
+    padding-left: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 5px;
+  }
+  span {
+    padding-left: 15px;
+    font-size: 12px;
+    color: #2a4d7c;
+  }
+`;
+
+const List = styled.div`
+  width: 100%;
+  padding-left: 10px;
+  height: 35px;
+  line-height: 35px;
+  //background-color: #c4b4b4;
+  //border: 1px solid black;
+  display: flex;
+  span {
+    //background-color: red;
+    padding-left: 0px;
+    font-size: 18px;
+    padding-right: 10px;
+  }
+  h2 {
+    //background-color: yellow;
+    padding-left: 10px;
+    display: inline-block;
+    font-size: 18px;
+  }
+  img {
+    padding-left: 10px;
+    //background-color: yellow;
+  }
+`;
+
 const Item = [
   ["배스킨라빈스", "스트로베리 하트 모찌", "02.png"],
   ["파리바게뜨", "오렌지&자몽 레어치즈 타르트", "04.png"],
   ["투썸플레이스", "스트로베리 초콜릿 생크림", "01.jpg"],
   ["GS25", "그릭 프로즌 요거트", "05.jpg"],
   ["던킨도너츠", "마이멜로디 딸기 츄이스티", "03.png"],
+];
+
+const ListItem = [
+  ["연세우유 초코생크림 빵", "cu.jpg"],
+  ["사랑에 빠진 딸기", "br.png"],
+  ["쿠로미 초코 츄이스티", "dunkin.png"],
+  ["자바 칩 프라푸치노", "starbucks.png"],
+  ["스파이시 이탈리안", "subway.png"],
 ];
 
 function Search() {
@@ -190,6 +250,18 @@ function Search() {
             ))}
           </Swiper>
         </MonthNewMenu>
+        <Rank>
+          <h1>리뷰 랭킹</h1>
+          <span>2023.05.30-2023.06.12 기준</span>
+          {ListItem.map((item, index) => (
+            <List>
+              <span>{index + 1}</span>
+              <h2>{item[0]}</h2>
+              <img src={"/logo/" + item[1]}></img>
+            </List>
+          ))}
+        </Rank>
+        <Footer />
       </Content>
     </>
   );
