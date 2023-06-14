@@ -5,51 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css";
-import Footer from "./Footer";
-
-const Nav = styled.div`
-  height: 50px;
-  width: 100%;
-  background-color: #2a4d7c;
-  text-align: center;
-  display: flex;
-  //justify-content: space-between;
-  align-items: center;
-`;
-
-const LogoBox = styled.div`
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  text-align: center;
-  margin: 0 auto;
-  cursor: pointer;
-  p {
-    color: white;
-    font-family: "Archivo", sans-serif;
-    font-size: 20px;
-    line-height: 50px;
-  }
-`;
-
-const Logo = styled.div`
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-  line-height: 50px;
-  background-image: url("img/logo.png");
-  background-size: cover;
-`;
-
-const Menu = styled.div`
-  height: 28px;
-  width: 28px;
-  line-height: 50px;
-  background-image: url("img/menu.png");
-  background-size: cover;
-  position: absolute;
-  right: 8px;
-`;
+import Footer from "./Components/Footer";
+import Bar from "./Components/Bar";
 
 const SearchBox = styled.div`
   height: 50px;
@@ -75,9 +32,11 @@ const Input = styled.input`
   :focus {
     border: none;
     outline: 0;
+    text-align: left;
   }
   font-size: 1rem;
   font-family: "Pretendard-Regular", sans-serif;
+  text-align: center;
 `;
 
 const MonthNewMenu = styled.div`
@@ -109,6 +68,7 @@ const Content = styled.div<{ isPc: boolean }>`
       padding-left: 10px;
     }
   }
+  padding-bottom: 30px;
 `;
 
 const PImg = styled.div<{ url: string; isPc: boolean }>`
@@ -145,7 +105,7 @@ const Rank = styled.div`
     padding-left: 10px;
     font-size: 18px;
     font-weight: 600;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
   }
   span {
     padding-left: 15px;
@@ -199,9 +159,7 @@ const ListItem = [
 function Search() {
   const navigate = useNavigate();
   const isPc = useMediaQuery({ query: "(min-width: 720px)" });
-  const onHomeClick = () => {
-    navigate("/");
-  };
+
   const [num, setNum] = useState(4);
   useEffect(() => {
     if (isPc) {
@@ -213,15 +171,9 @@ function Search() {
 
   return (
     <>
-      <Nav>
-        <LogoBox onClick={onHomeClick}>
-          <p>YAM EAT</p>
-          <Logo />
-        </LogoBox>
-        <Menu />
-      </Nav>
+      <Bar />
       <SearchBox>
-        <Input />
+        <Input placeholder="궁금한 제품을 검색해보세요! :p" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="1em"

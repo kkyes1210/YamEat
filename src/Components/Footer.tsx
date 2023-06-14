@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   text-align: center;
   font-family: "Pretendard-Regular", sans-serif;
-  margin-bottom: 30px;
+  //margin-bottom: 30px;
   font-size: 12px;
   p {
     color: #c6c6c6;

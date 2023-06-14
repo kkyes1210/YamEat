@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -76,7 +77,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 );
